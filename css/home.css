@@ -1,43 +1,38 @@
-* {
-    font-family: sans-serif; /* Change your font family */
-  }
-  h1{
-      text-align: center;
-  }
-  .content-table {
-    border-collapse: collapse;
+*{
+	margin: 0%;
+	padding: 0%;
+	box-sizing: border-box;
+}
+h1, h2{
     margin: 20px;
-    font-size: 1.2em;
-    width: 80%;
-    border-radius: 5px 5px 0 0;
-    overflow: hidden;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+main{
+	width: auto;
+	margin: auto;
+	max-width: 1200px;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 20px;
+	background-color: rgba(236, 236, 236, 0.568);
+	padding: 20px;
+	border-radius: 10px;
+}
+article{
+	flex: 1 1 350px;
+    width: 300px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+article img {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+	display: block;
+    height: 300px;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
-  }
-  
-  .content-table thead tr {
-    background-color: #009879;
-    color: #ffffff;
-    text-align: left;
-    font-weight: bold;
-  }
-  
-  .content-table th,
-  .content-table td {
-    padding: 12px 15px;
-  }
-  
-  .content-table tbody tr {
-    border-bottom: 1px solid #dddddd;
-  }
-  
-  .content-table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
-  }
-  
-  .content-table tbody tr:last-of-type {
-    border-bottom: 2px solid #009879;
-  }
-  /* met behulp van https://codepen.io/dcode-software/pen/dLVwOY */
-  
+}	
