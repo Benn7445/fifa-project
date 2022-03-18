@@ -1,0 +1,32 @@
+.profile-pic {
+    font-size: 33px;
+  }
+  
+  .navbar {
+    box-shadow: 0 2px 2px -2px rgb(122, 122, 122);
+  }
+  
+  .divider {
+    margin: 7px 15px;
+  }
+  
+  .navbar-btn {
+    border-radius: 10px;
+    border: 1px solid black;
+    padding: 5px 25px;
+    outline: none;
+  }
+  
+  .navbar-btn:hover {
+    background-color: #009879;
+  }
+  
+  .navbar-btn > a {
+      text-decoration: none;
+      color: black;
+  }
+  
+  .navbar-btn:hover > a {
+      color: #fff;
+  }
+  
