@@ -22,7 +22,7 @@ fetch("https://futdb.app/api/clubs/2/image", {
         })
     });
 
-fetch("questions.json")
+fetch("/storage/questions.json")
     .then((res) => {
         return res.json();
     })
