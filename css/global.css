@@ -37,3 +37,14 @@ a > .navbar-btn {
 a > .navbar-btn:hover {
   color: #fff;
 }
+
+@media only screen and (max-width: 992px) {
+  .navbar-nav {
+    flex-direction: row !important;
+    margin: 15px 0px;
+  }
+
+  .profile-pic {
+      margin-right: 5px;
+  }
+}
