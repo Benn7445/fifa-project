@@ -6,6 +6,18 @@ export async function getUsers() {
         });
 }
 
+export function saveUser(name) {
+    return fetch("http://localhost:3000/user/save", {
+        method: 'POST', body: JSON.stringify({
+            name
+        })
+    }).then((result) => result.json())
+        .then(data => {
+            if (data.status === "SUCCESS") return data.users;
+            else return [];
+        });
+}
+
 export async function checkLogin() {
     return await fetch("http://localhost:3000/user/get", {
         method: 'POST', headers: {
