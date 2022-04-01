@@ -1,71 +1,80 @@
 .choice-container {
-  display: flex;
-  margin-bottom: 0.5rem;
-  width: 100%;
-  font-size: 1.8rem;
-  border: 0.1rem solid #009879;
-  background-color: white;
+    display: flex;
+    margin-bottom: 0.5rem;
+    width: 100%;
+    font-size: 1.8rem;
+    border: 0.1rem solid #009879;
+    background-color: white;
 }
-
+.choice-container p{
+    margin-bottom: 0;
+}
 .choice-container:hover {
-  cursor: pointer;
-  box-shadow: 0 0.4rem 1.4rem 0 #009879;
-  transform: translateY(-0.1rem);
-  transition: transform 150ms;
+    cursor: pointer;
+    box-shadow: 0 0.4rem 1.4rem 0 #009879;
+    transform: translateY(-0.1rem);
+    transition: transform 150ms;
 }
 
 .choice-prefix {
-  padding: 1.5rem 2.5rem;
-  background-color: #009879;
-  color: white;
+    padding: 1.5rem 2.5rem;
+    background-color: #009879;
+    color: white;
 }
 
 .choice-text {
-  padding: 1.5rem;
-  width: 100%;
+    padding: 1.5rem;
+    width: 100%;
 }
 
 .correct {
-  background-color: #28a745;
+    background-color: #28a745;
 }
 
 .incorrect {
-  background-color: #dc3545;
+    background-color: #dc3545;
 }
+
 
 /* HUD */
 
 #hud {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
 }
 
 .hud-prefix {
-  text-align: center;
-  font-size: 2rem;
+    text-align: center;
+    font-size: 2rem;
 }
 
 .hud-main-text {
-  text-align: center;
+    text-align: center;
 }
 
-#progressBar {
-  width: 20rem;
-  height: 4rem;
-  border: 0.3rem solid #009879;
-  margin-top: 1.5rem;
-}
 
-#progressBarFull {
-  height: 3.4rem;
-  background-color: #009879;
-  width: 0%;
-}
 .btn {
-  background-color: #009879 !important; /* Blue background */
-  border: none; /* Remove borders */
-  padding: 12px 16px; /* Some padding */
-  font-size: 16px; /* Set a font size */
-  cursor: pointer; /* Mouse pointer on hover */
-  border-radius: 5px 5px 0
+    background-color: white !important;
+    margin-bottom: 0.5rem;
+    /* Blue background */
+    border: 0.1rem solid #009879 !important;
+    /* Remove borders */
+    margin-right: 0.5rem;
+    /* Some padding */
+    font-size: 16px;
+    /* Set a font size */
+    cursor: pointer;
+    /* Mouse pointer on hover */
+    border-radius: 5px 5px 0
+}
+.btn:hover{
+    cursor: pointer;
+    box-shadow: 0 0.4rem 1.4rem 0 #009879;
+    transform: translateY(-0.1rem);
+    transition: transform 150ms;
+}
+div img {
+    height: 200px;
+    width: auto;
 }
