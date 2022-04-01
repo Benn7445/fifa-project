@@ -46,21 +46,27 @@ startGame = () => {
 };
 
 getNewQuestion = () => {
-    if (availableQuesions.length === 0) {
-        localStorage.setItem("mostRecentScore", score);
-        //go to the end page
-        return window.location.assign("/end.html");
-    }
+    /* if (availableQuesions.length === 0) {
+      localStorage.setItem("mostRecentScore", score);
+      //go to the end page
+      return window.location.assign("/end.html");
+    }*/
 
     questionCounter++;
     progressText.innerText = ``;
-    const questionIndex = Math.floor(Math.random() * availableQuesions.length);
+    let questionIndex =
+        question.dataset["number"] && question.dataset["number"] !== ""
+            ? parseInt(question.dataset["number"]) + 1
+            : 0;
+    if (availableQuesions.length - 1 < questionIndex) questionIndex = 0;
     currentQuestion = availableQuesions[questionIndex];
     question.innerText = currentQuestion.question;
+    question.dataset["number"] = questionIndex;
     choices.forEach((choice) => {
         const number = choice.dataset["number"];
         choice.innerText = currentQuestion["choice" + number];
     });
+
     acceptingAnswers = true;
 };
 
