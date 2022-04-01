@@ -11,87 +11,87 @@ let availableQuesions = [];
 
 let questions = [];
 fetch("https://futdb.app/api/clubs/2/image", {
-    headers: {
-        "X-AUTH-TOKEN": "ab5195e0-4d2f-43e2-ba6a-80cd57c641b3",
-    },
-})
-    .then((response) => {
-        response.blob().then(blobResponse => {
-            const urlCreator = window.URL || window.webkitURL;
-            document.getElementById('clubimg').src = urlCreator.createObjectURL(blobResponse);
-        })
-    });
+  headers: {
+    "X-AUTH-TOKEN": "ab5195e0-4d2f-43e2-ba6a-80cd57c641b3",
+  },
+}).then((response) => {
+  response.blob().then((blobResponse) => {
+    const urlCreator = window.URL || window.webkitURL;
+    document.getElementById("clubimg").src =
+      urlCreator.createObjectURL(blobResponse);
+  });
+});
 
 fetch("questions.json")
-    .then((res) => {
-        return res.json();
-    })
-    .then((loadedQuestions) => {
-        questions = loadedQuestions;
-        startGame();
-    })
-    .catch((err) => {
-        console.error(err);
-    });
+  .then((res) => {
+    return res.json();
+  })
+  .then((loadedQuestions) => {
+    questions = loadedQuestions;
+    startGame();
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 
 //CONSTANTS
 const CORRECT_BONUS = 10;
 const MAX_QUESTIONS = 9999;
 
 startGame = () => {
-    questionCounter = 0;
-    score = 0;
-    availableQuesions = [...questions];
-    getNewQuestion();
+  questionCounter = 0;
+  score = 0;
+  availableQuesions = [...questions];
+  getNewQuestion();
 };
 
 getNewQuestion = () => {
-    if (availableQuesions.length === 0) {
-        localStorage.setItem("mostRecentScore", score);
-        //go to the end page
-        return window.location.assign("/end.html");
-    }
+  if (availableQuesions.length === 0) {
+    localStorage.setItem("mostRecentScore", score);
+    //go to the end page
+    return window.location.assign("/end.html");
+  }
 
-    questionCounter++;
-    progressText.innerText = ``;
-    const questionIndex = Math.floor(Math.random() * availableQuesions.length);
-    currentQuestion = availableQuesions[questionIndex];
-    question.innerText = currentQuestion.question;
-    choices.forEach((choice) => {
-        const number = choice.dataset["number"];
-        choice.innerText = currentQuestion["choice" + number];
-    });
-    acceptingAnswers = true;
+  questionCounter++;
+  progressText.innerText = ``;
+  const questionIndex = Math.floor(Math.random() * availableQuesions.length);
+  currentQuestion = availableQuesions[questionIndex];
+  question.innerText = currentQuestion.question;
+  choices.forEach((choice) => {
+    const number = choice.dataset["number"];
+    choice.innerText = currentQuestion["choice" + number];
+  });
+  acceptingAnswers = true;
 };
 
 choices.forEach((choice) => {
-    choice.addEventListener("click", (e) => {
-        if (!acceptingAnswers) return;
+  choice.addEventListener("click", (e) => {
+    if (!acceptingAnswers) return;
 
-        acceptingAnswers = false;
-        const selectedChoice = e.target;
-        const selectedAnswer = selectedChoice.dataset["number"];
+    acceptingAnswers = false;
+    const selectedChoice = e.target;
+    const selectedAnswer = selectedChoice.dataset["number"];
 
-        const classToApply =
-            selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
+    const classToApply =
+      selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
 
-        if (classToApply === "correct") {
-            incrementScore(CORRECT_BONUS);
-        } else {
-            localStorage.setItem("mostRecentScore", score);
-            //go to the end page
-            return window.location.assign("/end.html");
-        }
-        selectedChoice.parentElement.classList.add(classToApply);
+    if (classToApply === "correct") {
+      incrementScore(CORRECT_BONUS);
+    } else {
+      localStorage.setItem("mostRecentScore", score);
+      //go to the end page
+      return window.location.assign("/end.html");
+    }
+    selectedChoice.parentElement.classList.add(classToApply);
 
-        setTimeout(() => {
-            selectedChoice.parentElement.classList.remove(classToApply);
-            getNewQuestion();
-        }, 1000);
-    });
+    setTimeout(() => {
+      selectedChoice.parentElement.classList.remove(classToApply);
+      getNewQuestion();
+    }, 1000);
+  });
 });
 
 incrementScore = (num) => {
-    score += num;
-    scoreText.innerText = score;
+  score += num;
+  scoreText.innerText = score;
 };
