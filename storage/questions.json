@@ -1,10 +1,11 @@
 [
   {
-    "question": "Inside which HTML element do we put the JavaScript??",
-    "choice1": "<script>",
-    "choice2": "<javascript>",
-    "choice3": "<js>",
-    "choice4": "<scripting>",
+    
+    "question": "Bij welke club hoort deze image?",
+    "choice1": "Arsenal",
+    "choice2": "Rode duivels",
+    "choice3": "test",
+    "choice4": "test",
     "answer": 1
   },
   {

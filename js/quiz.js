@@ -8,19 +8,9 @@ let acceptingAnswers = false;
 let score = 0;
 let questionCounter = 0;
 let availableQuesions = [];
+let questionCounter2 = 1;
 
 let questions = [];
-fetch("https://futdb.app/api/clubs/2/image", {
-  headers: {
-    "X-AUTH-TOKEN": "ab5195e0-4d2f-43e2-ba6a-80cd57c641b3",
-  },
-}).then((response) => {
-  response.blob().then((blobResponse) => {
-    const urlCreator = window.URL || window.webkitURL;
-    document.getElementById("clubimg").src =
-      urlCreator.createObjectURL(blobResponse);
-  });
-});
 
 fetch("/storage/questions.json")
   .then((res) => {
@@ -51,8 +41,33 @@ getNewQuestion = () => {
       //go to the end page
       return window.location.assign("/end.html");
     }*/
-
   questionCounter++;
+  if (questionCounter % 2 == 0) {
+    fetch(`https://futdb.app/api/clubs/${questionCounter}/image`, {
+      headers: {
+        "X-AUTH-TOKEN": "ab5195e0-4d2f-43e2-ba6a-80cd57c641b3",
+      },
+    }).then((response) => {
+      response.blob().then((blobResponse) => {
+        const urlCreator = window.URL || window.webkitURL;
+        document.getElementById("clubimg").src =
+          urlCreator.createObjectURL(blobResponse);
+      });
+    });
+  } else {
+    fetch(`https://futdb.app/api/leagues/${questionCounter}/image`, {
+      headers: {
+        "X-AUTH-TOKEN": "ab5195e0-4d2f-43e2-ba6a-80cd57c641b3",
+      },
+    }).then((response) => {
+      response.blob().then((blobResponse) => {
+        const urlCreator = window.URL || window.webkitURL;
+        document.getElementById("clubimg").src =
+          urlCreator.createObjectURL(blobResponse);
+      });
+    });
+  }
+
   progressText.innerText = ``;
   let questionIndex =
     question.dataset["number"] && question.dataset["number"] !== ""
