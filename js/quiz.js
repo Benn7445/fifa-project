@@ -47,18 +47,18 @@ startGame = () => {
 
 getNewQuestion = () => {
   /* if (availableQuesions.length === 0) {
-    localStorage.setItem("mostRecentScore", score);
-    //go to the end page
-    return window.location.assign("/end.html");
-  }*/
+      localStorage.setItem("mostRecentScore", score);
+      //go to the end page
+      return window.location.assign("/end.html");
+    }*/
 
   questionCounter++;
   progressText.innerText = ``;
   let questionIndex =
-    question.dataset["number"] !== ""
+    question.dataset["number"] && question.dataset["number"] !== ""
       ? parseInt(question.dataset["number"]) + 1
-      : 1; // Math.random() * availableQuesions.length
-
+      : 0;
+  if (availableQuesions.length - 1 < questionIndex) questionIndex = 0;
   currentQuestion = availableQuesions[questionIndex];
   question.innerText = currentQuestion.question;
   question.dataset["number"] = questionIndex;
