@@ -66,7 +66,7 @@
         <div id="hud">
           <div id="hud-item">
             <p id="progressText" class="hud-prefix"></p>
-            <img alt="denden" id="clubimg"></img>
+            <img alt="" id="clubimg"></img>
           </div>
           <div id="hud-item">
             <p class="hud-prefix">Score</p>
@@ -74,10 +74,8 @@
           </div>
           
         </div>
-        <div>
-          <button class="btn"><i class="fa fa-thumbs-up"></i></button>
-          <button class="btn"><i class="fa fa-star"></i></button>
-          <button class="btn"><i class="fa fa-thumbs-down"></i></button>
+          <button class="btn"><a class="click"><i class="fa fa-thumbs-up"></i></a></button>
+          <button class="btn"><a class="clicks"><i class="fa fa-thumbs-down"></i></a></button>
         </div>
         <h2 id="question">What is the answer to this questions?</h2>
         <div class="choice-container">
@@ -100,8 +98,27 @@
     </div>
     <script src="game.js"></script>
 </body>
-</div>
+</div><script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<script>
+      $('.click').on('click', function () {
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'De club/league is op favorieten gezet ',
+        })
+      })
+    </script>
+    <script>
+      $('.clicks').on('click', function () {
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'De club/league is op de blacklist lijst gezet',
+        })
+      })
+    </script>
+  
 <script src="../js/quiz.js"></script>
 </body>
 

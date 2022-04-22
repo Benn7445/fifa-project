@@ -11,19 +11,18 @@ let availableQuesions = [];
 let questionCounter2 = 1;
 
 let questions = [];
-
-fetch("/storage/questions.json")
-  .then((res) => {
-    return res.json();
+let leagueTest = fetch(`https://futdb.app/api/leagues/1`, {
+  headers: {
+    "X-AUTH-TOKEN": "ab5195e0-4d2f-43e2-ba6a-80cd57c641b3",
+  },
+})
+  .then((response) => {
+    return response.text();
   })
-  .then((loadedQuestions) => {
-    questions = loadedQuestions;
-    startGame();
-  })
-  .catch((err) => {
-    console.error(err);
-  });
-
+  .then((data) => {
+    return data.item.name;
+    console.log(data.item.name);
+  }); // exceptionss;
 //CONSTANTS
 const CORRECT_BONUS = 10;
 const MAX_QUESTIONS = 9999;
@@ -54,6 +53,18 @@ getNewQuestion = () => {
           urlCreator.createObjectURL(blobResponse);
       });
     });
+    fetch(`https://futdb.app/api/clubs/${questionCounter}`, {
+      headers: {
+        "X-AUTH-TOKEN": "ab5195e0-4d2f-43e2-ba6a-80cd57c641b3",
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        let clubAnswer = data.item.name;
+        console.log(data.item.name);
+      }); // exceptionss
   } else {
     fetch(`https://futdb.app/api/leagues/${questionCounter}/image`, {
       headers: {
@@ -66,6 +77,18 @@ getNewQuestion = () => {
           urlCreator.createObjectURL(blobResponse);
       });
     });
+    fetch(`https://futdb.app/api/leagues/${questionCounter}`, {
+      headers: {
+        "X-AUTH-TOKEN": "ab5195e0-4d2f-43e2-ba6a-80cd57c641b3",
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        let leagueAnswer = data.item.name;
+        console.log(data.item.name);
+      }); // exceptionss;
   }
 
   progressText.innerText = ``;
@@ -84,7 +107,27 @@ getNewQuestion = () => {
 
   acceptingAnswers = true;
 };
-
+fetch("/storage/questions.json")
+  .then((res) => {
+    return res.json();
+  })
+  .then((loadedQuestions) => {
+    questions = loadedQuestions;
+    questions = [
+      {
+        question: "welke club is dit?",
+        choice1: leagueTest.data,
+        choice2: "Rode duivels",
+        choice3: "d",
+        choice4: "test",
+        answer: 1,
+      },
+    ];
+    startGame();
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 choices.forEach((choice) => {
   choice.addEventListener("click", (e) => {
     if (!acceptingAnswers) return;
@@ -97,7 +140,7 @@ choices.forEach((choice) => {
       selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
 
     if (classToApply === "correct") {
-      incrementScore(CORRECT_BONUS);
+      let score = incrementScore(CORRECT_BONUS);
     } else {
       localStorage.setItem("mostRecentScore", score);
       //go to the end page
