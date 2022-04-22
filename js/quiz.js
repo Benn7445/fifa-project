@@ -67,7 +67,7 @@ getNewQuestion = () => {
       });
     });
   }
-
+  
   progressText.innerText = ``;
   let questionIndex =
     question.dataset["number"] && question.dataset["number"] !== ""
@@ -84,6 +84,7 @@ getNewQuestion = () => {
 
   acceptingAnswers = true;
 };
+
 
 choices.forEach((choice) => {
   choice.addEventListener("click", (e) => {
