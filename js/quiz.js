@@ -21,8 +21,8 @@ let leagueTest = fetch(`https://futdb.app/api/leagues/1`, {
   })
   .then((data) => {
     return data.item.name;
-    console.log(data.item.name);
   }); // exceptionss;
+
 //CONSTANTS
 const CORRECT_BONUS = 10;
 const MAX_QUESTIONS = 9999;
@@ -87,7 +87,7 @@ getNewQuestion = () => {
       })
       .then((data) => {
         let leagueAnswer = data.item.name;
-        console.log(data.item.name);
+        console.log(data.item.id);
       }); // exceptionss;
   }
 
@@ -116,7 +116,7 @@ fetch("/storage/questions.json")
     questions = [
       {
         question: "welke club is dit?",
-        choice1: leagueTest.data,
+        choice1: JSON.stringify(leagueTest),
         choice2: "Rode duivels",
         choice3: "d",
         choice4: "test",
