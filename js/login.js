@@ -1,7 +1,10 @@
 import { checkLogin, saveUser } from "../api/userActions.js";
 
+/**
+ * Hier checken we of de user is ingelogd. Als deze een user terugstuurt weten we dat deze is geautenticate.
+ */
 checkLogin().then((user) => {
-  if (!user) {
+  if (!user) { // Als de user niet is gevonden komt er een modal waarin de user zijn gebruikersnaam moet invullen.
     const loginBackground = document.createElement("div");
     loginBackground.style.cssText =
       "display: flex; position: absolute; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); top: 0;";
@@ -29,7 +32,7 @@ checkLogin().then((user) => {
     loginModal.appendChild(continueButton);
     loginBackground.appendChild(loginModal);
     document.getElementsByTagName("body")[0].appendChild(loginBackground);
-  } else {
+  } else { // Als deze wel is gevonden zal de gebruiker zijn naam links boven kunnen zien.
       const hiUser = document.getElementById("navbarDropdown");
       hiUser.text = "Hi, " + user.name + "!";
   }
