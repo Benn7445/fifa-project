@@ -25,6 +25,10 @@ export async function saveUser(name) {
   });
 }
 
+export async function updateUser(name) {
+  postData("http://localhost:3000/user/update", { name: name });
+}
+
 /**
  * Deze functie checked of de user is ingelogd via een aangemaakte post request die naar een functie gaat in de backend.
  * Deze functie moet uitgevoerd worden aan het laden van elke pagina, behalve de landingspage.

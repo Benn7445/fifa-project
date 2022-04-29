@@ -1,3 +1,5 @@
+import { updateUser } from "../api/userActions";
+
 const question = document.getElementById("question");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
 const progressText = document.getElementById("progressText");
@@ -147,8 +149,8 @@ choices.forEach((choice) => {
       let score = incrementScore(CORRECT_BONUS);
     } else {
       localStorage.setItem("mostRecentScore", score);
-      //go to the end page
-      return window.location.assign("/end.html");
+      updateUser();
+      return window.location.assign("/leaderboard.html");
     }
     selectedChoice.parentElement.classList.add(classToApply);
 
