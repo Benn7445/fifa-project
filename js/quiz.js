@@ -1,4 +1,4 @@
-import { updateUser } from "../api/userActions";
+import { updateUser } from "../api/userActions.js";
 
 const question = document.getElementById("question");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
@@ -28,14 +28,14 @@ let leagueTest = fetch(`https://futdb.app/api/leagues/1`, {
 const CORRECT_BONUS = 10;
 const MAX_QUESTIONS = 9999;
 
-startGame = () => {
+const startGame = () => {
   questionCounter = 0;
   score = 0;
   availableQuesions = [...questions];
   getNewQuestion();
 };
 
-getNewQuestion = () => {
+const getNewQuestion = () => {
   /* if (availableQuesions.length === 0) {
       localStorage.setItem("mostRecentScore", score);
       //go to the end page
@@ -149,8 +149,8 @@ choices.forEach((choice) => {
       let score = incrementScore(CORRECT_BONUS);
     } else {
       localStorage.setItem("mostRecentScore", score);
-      updateUser();
-      return window.location.assign("/leaderboard.html");
+      updateUser(score);
+      return window.location.assign("/html/leaderboard.html");
     }
     selectedChoice.parentElement.classList.add(classToApply);
 
@@ -161,7 +161,7 @@ choices.forEach((choice) => {
   });
 });
 
-incrementScore = (num) => {
+const incrementScore = (num) => {
   score += num;
   scoreText.innerText = score;
 };

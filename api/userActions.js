@@ -25,8 +25,8 @@ export async function saveUser(name) {
   });
 }
 
-export async function updateUser(name) {
-  postData("http://localhost:3000/user/update", { name: name });
+export function updateUser(score) {
+  postData("http://localhost:3000/user/update", { score: score });
 }
 
 /**
