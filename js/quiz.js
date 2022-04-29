@@ -1,3 +1,5 @@
+import { updateUser } from "../api/userActions";
+
 const question = document.getElementById("question");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
 const progressText = document.getElementById("progressText");
@@ -17,7 +19,7 @@ let leagueTest = fetch(`https://futdb.app/api/leagues/1`, {
   },
 })
   .then((response) => {
-    return response.text();
+    return response.json();
   })
   .then((data) => {
     return data.item.name;
@@ -107,23 +109,27 @@ getNewQuestion = () => {
 
   acceptingAnswers = true;
 };
+
 fetch("/storage/questions.json")
   .then((res) => {
     return res.json();
   })
   .then((loadedQuestions) => {
-    questions = loadedQuestions;
-    questions = [
-      {
-        question: "welke club is dit?",
-        choice1: JSON.stringify(leagueTest),
-        choice2: "Rode duivels",
-        choice3: "d",
-        choice4: "test",
-        answer: 1,
-      },
-    ];
-    startGame();
+    leagueTest.then((league) => {
+      console.log(league);
+      questions = loadedQuestions;
+      questions = [
+        {
+          question: "Welke club is dit?",
+          choice1: league,
+          choice2: "Rode duivels",
+          choice3: "d",
+          choice4: "test",
+          answer: 1,
+        },
+      ];
+      startGame();
+    });
   })
   .catch((err) => {
     console.error(err);
@@ -143,8 +149,8 @@ choices.forEach((choice) => {
       let score = incrementScore(CORRECT_BONUS);
     } else {
       localStorage.setItem("mostRecentScore", score);
-      //go to the end page
-      return window.location.assign("/end.html");
+      updateUser();
+      return window.location.assign("/leaderboard.html");
     }
     selectedChoice.parentElement.classList.add(classToApply);
 
