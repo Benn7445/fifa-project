@@ -1,3 +1,5 @@
+import { updateUser } from "../api/userActions.js";
+
 const question = document.getElementById("question");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
 const progressText = document.getElementById("progressText");
@@ -26,14 +28,14 @@ let leagueTest = fetch(`https://futdb.app/api/leagues/1`, {
 const CORRECT_BONUS = 10;
 const MAX_QUESTIONS = 9999;
 
-startGame = () => {
+const startGame = () => {
   questionCounter = 0;
   score = 0;
   availableQuesions = [...questions];
   getNewQuestion();
 };
 
-getNewQuestion = () => {
+const getNewQuestion = () => {
   /* if (availableQuesions.length === 0) {
       localStorage.setItem("mostRecentScore", score);
       //go to the end page
@@ -62,7 +64,6 @@ getNewQuestion = () => {
       })
       .then((data) => {
         let clubAnswer = data.item.name;
-        console.log(data.item.name);
       }); // exceptionss
   } else {
     fetch(`https://futdb.app/api/leagues/${questionCounter}/image`, {
@@ -86,10 +87,9 @@ getNewQuestion = () => {
       })
       .then((data) => {
         let leagueAnswer = data.item.name;
-        console.log(data.item.name);
       }); // exceptionss;
   }
-  
+
   progressText.innerText = ``;
   let questionIndex =
     question.dataset["number"] && question.dataset["number"] !== ""
@@ -108,27 +108,20 @@ getNewQuestion = () => {
 };
 
 
-fetch("/storage/questions.json")
-  .then((res) => {
-    return res.json();
-  })
-  .then((loadedQuestions) => {
-    questions = loadedQuestions;
-    questions = [
-      {
-        question: "welke club is dit?",
-        choice1: leagueTest.data,
-        choice2: "Rode duivels",
-        choice3: "d",
-        choice4: "test",
-        answer: 1,
-      },
-    ];
-    startGame();
-  })
-  .catch((err) => {
-    console.error(err);
-  });
+
+leagueTest.then((league) => {
+  questions = [
+    {
+      question: "Welke club is dit?",
+      choice1: league,
+      choice2: "Rode duivels",
+      choice3: "d",
+      choice4: "test",
+      answer: 1,
+    },
+  ];
+  startGame();
+})
 choices.forEach((choice) => {
   choice.addEventListener("click", (e) => {
     if (!acceptingAnswers) return;
@@ -144,8 +137,8 @@ choices.forEach((choice) => {
       let score = incrementScore(CORRECT_BONUS);
     } else {
       localStorage.setItem("mostRecentScore", score);
-      //go to the end page
-      return window.location.assign("/end.html");
+      updateUser(score);
+      return window.location.assign("/html/leaderboard.html");
     }
     selectedChoice.parentElement.classList.add(classToApply);
 
@@ -156,7 +149,7 @@ choices.forEach((choice) => {
   });
 });
 
-incrementScore = (num) => {
+const incrementScore = (num) => {
   score += num;
   scoreText.innerText = score;
 };

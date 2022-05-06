@@ -17,12 +17,14 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
+    <script defer type="module" src="../js/login.js"></script>
+    <script defer type="module" src="../js/quiz.js"></script>
 
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fifa Quiz</title>
-  <scrip src="../js/index.js" />
+  <scrip type="module" src="../js/index.js" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/global.css" />
   <script src="https://code.iconify.design/2/2.1.2/iconify.min.js"></script>
@@ -46,15 +48,16 @@
             Hi, user!
           </a>
           <section class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="../html/blacklisted_leagues.html">Blacklisted League</a>
             <a class="dropdown-item" href="../html/blacklisted_clubs.html">Blacklisted Club</a>
             <hr class="divider" />
             <a class="dropdown-item" href="../html/favorite_leagues.html">Favorite League</a>
+            <a class="dropdown-item" href="../html/favorite_clubs.html">Favorite clubs</a>
+
           </section>
         </li>
       </ul>
       <section>
-        <a href="../html/landing_page.html"><button class="navbar-btn">Home</button></a>
+        <a href="../html/"><button class="navbar-btn">Home</button></a>
         <a href="../html/quiz.html"><button class="navbar-btn active">Quiz</button></a>
         <a href="../html/leaderboard.html"><button class="navbar-btn">Leaderboards</button></a>
       </section>
@@ -96,7 +99,6 @@
         </div>
       </div>
     </div>
-    <script src="game.js"></script>
 </body>
 </div><script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -118,8 +120,6 @@
         })
       })
     </script>
-  
-<script src="../js/quiz.js"></script>
 </body>
 
 </html>
