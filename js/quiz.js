@@ -8,12 +8,12 @@ const progressBarFull = document.getElementById("progressBarFull");
 let currentQuestion = {};
 let acceptingAnswers = false;
 let score = 0;
-let questionCounter = 0;
+let questionCounter = 1;
 let availableQuesions = [];
 let questionCounter2 = 1;
 
 let questions = [];
-let leagueTest = fetch(`https://futdb.app/api/leagues/1`, {
+let leagueTest = fetch(`https://futdb.app/api/leagues/${questionCounter}`, {
   headers: {
     "X-AUTH-TOKEN": "ab5195e0-4d2f-43e2-ba6a-80cd57c641b3",
   },
@@ -23,6 +23,9 @@ let leagueTest = fetch(`https://futdb.app/api/leagues/1`, {
   })
   .then((data) => {
     return data.item.name;
+  })
+  .catch((err) => {
+    return "Deze api werkt niet";
   }); // exceptionss;
 //CONSTANTS
 const CORRECT_BONUS = 10;
@@ -87,6 +90,7 @@ const getNewQuestion = () => {
       })
       .then((data) => {
         let leagueAnswer = data.item.name;
+        console.log(data.item.id);
       }); // exceptionss;
   }
 
@@ -107,21 +111,28 @@ const getNewQuestion = () => {
   acceptingAnswers = true;
 };
 
-
-
 leagueTest.then((league) => {
+  console.log(league);
   questions = [
     {
-      question: "Welke club is dit?",
+      question: "Welke league is dit?",
       choice1: league,
       choice2: "Rode duivels",
       choice3: "d",
       choice4: "test",
       answer: 1,
     },
+    {
+      question: "Welke club is dit?",
+      choice1: "Patat",
+      choice2: "Rode duivels",
+      choice3: league,
+      choice4: "test",
+      answer: 3,
+    },
   ];
   startGame();
-})
+});
 choices.forEach((choice) => {
   choice.addEventListener("click", (e) => {
     if (!acceptingAnswers) return;
@@ -135,6 +146,7 @@ choices.forEach((choice) => {
 
     if (classToApply === "correct") {
       let score = incrementScore(CORRECT_BONUS);
+      console.log(questionCounter);
     } else {
       localStorage.setItem("mostRecentScore", score);
       updateUser(score);
