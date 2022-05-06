@@ -64,7 +64,6 @@ const getNewQuestion = () => {
       })
       .then((data) => {
         let clubAnswer = data.item.name;
-        console.log(data.item.name);
       }); // exceptionss
   } else {
     fetch(`https://futdb.app/api/leagues/${questionCounter}/image`, {
@@ -88,7 +87,6 @@ const getNewQuestion = () => {
       })
       .then((data) => {
         let leagueAnswer = data.item.name;
-        console.log(data.item.name);
       }); // exceptionss;
   }
 
@@ -110,30 +108,20 @@ const getNewQuestion = () => {
 };
 
 
-fetch("/storage/questions.json")
-  .then((res) => {
-    return res.json();
-  })
-  .then((loadedQuestions) => {
-    leagueTest.then((league) => {
-      console.log(league)
-      questions = loadedQuestions;
-      questions = [
-        {
-          question: "Welke club is dit?",
-          choice1: league,
-          choice2: "Rode duivels",
-          choice3: "d",
-          choice4: "test",
-          answer: 1,
-        },
-      ];
-      startGame();
-    })
-  })
-  .catch((err) => {
-    console.error(err);
-  });
+
+leagueTest.then((league) => {
+  questions = [
+    {
+      question: "Welke club is dit?",
+      choice1: league,
+      choice2: "Rode duivels",
+      choice3: "d",
+      choice4: "test",
+      answer: 1,
+    },
+  ];
+  startGame();
+})
 choices.forEach((choice) => {
   choice.addEventListener("click", (e) => {
     if (!acceptingAnswers) return;

@@ -7,7 +7,7 @@ checkLogin().then((user) => {
   if (!user) { // Als de user niet is gevonden komt er een modal waarin de user zijn gebruikersnaam moet invullen.
     const loginBackground = document.createElement("div");
     loginBackground.style.cssText =
-      "display: flex; position: absolute; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); top: 0;";
+      "display: flex; position: absolute; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); top: 0; position: fixed;";
     const loginModal = document.createElement("div");
     loginModal.style.cssText =
       "display: flex; flex-direction: column; gap: 20px; margin: auto; background: #fff; padding: 50px; border-radius: 20px; box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;";
