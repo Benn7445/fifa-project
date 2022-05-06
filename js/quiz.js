@@ -67,7 +67,6 @@ const getNewQuestion = () => {
       })
       .then((data) => {
         let clubAnswer = data.item.name;
-        console.log(data.item.name);
       }); // exceptionss
   } else {
     fetch(`https://futdb.app/api/leagues/${questionCounter}/image`, {
