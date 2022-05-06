@@ -111,38 +111,28 @@ const getNewQuestion = () => {
   acceptingAnswers = true;
 };
 
-fetch("/storage/questions.json")
-  .then((res) => {
-    return res.json();
-  })
-  .then((loadedQuestions) => {
-    leagueTest.then((league) => {
-      console.log(league);
-      questions = loadedQuestions;
-      questions = [
-        {
-          question: "Welke league is dit?",
-          choice1: league,
-          choice2: "Rode duivels",
-          choice3: "d",
-          choice4: "test",
-          answer: 1,
-        },
-        {
-          question: "Welke club is dit?",
-          choice1: "Patat",
-          choice2: "Rode duivels",
-          choice3: league,
-          choice4: "test",
-          answer: 3,
-        },
-      ];
-      startGame();
-    });
-  })
-  .catch((err) => {
-    console.error(err);
-  });
+leagueTest.then((league) => {
+  console.log(league);
+  questions = [
+    {
+      question: "Welke league is dit?",
+      choice1: league,
+      choice2: "Rode duivels",
+      choice3: "d",
+      choice4: "test",
+      answer: 1,
+    },
+    {
+      question: "Welke club is dit?",
+      choice1: "Patat",
+      choice2: "Rode duivels",
+      choice3: league,
+      choice4: "test",
+      answer: 3,
+    },
+  ];
+  startGame();
+});
 choices.forEach((choice) => {
   choice.addEventListener("click", (e) => {
     if (!acceptingAnswers) return;
@@ -156,6 +146,7 @@ choices.forEach((choice) => {
 
     if (classToApply === "correct") {
       let score = incrementScore(CORRECT_BONUS);
+      console.log(questionCounter);
     } else {
       localStorage.setItem("mostRecentScore", score);
       updateUser(score);
