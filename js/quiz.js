@@ -17,11 +17,10 @@ let leagueTest = fetch(`https://futdb.app/api/leagues/1`, {
   },
 })
   .then((response) => {
-    return response.text();
+    return response.json();
   })
   .then((data) => {
     return data.item.name;
-    console.log(data.item.name);
   }); // exceptionss;
 //CONSTANTS
 const CORRECT_BONUS = 10;
