@@ -15,7 +15,7 @@
 }
 
 .content-table thead tr {
-  background-color: #009879;
+  background-color: #005391;
   color: #ffffff;
   text-align: left;
   font-weight: bold;
@@ -35,6 +35,6 @@
 }
 
 .content-table tbody tr:last-of-type {
-  border-bottom: 2px solid #009879;
+  border-bottom: 2px solid #005391;
 }
 /* met behulp van https://codepen.io/dcode-software/pen/dLVwOY */

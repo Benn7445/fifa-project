@@ -11,7 +11,7 @@ router.post("/save", (req, res) => {
     if (name !== undefined) {
         // Checked of 'name' wel in de body zit.
         const token = randomToken(32); // Maakt een token aan met de npm 'random-token'.
-        const sql = `INSERT INTO users VALUES ("${token}", "${name}", 0, "", "", "", "");`;
+        const sql = `INSERT INTO users VALUES ("${token}", "${name}", 0, "", "", "");`;
         connection.query(sql, function (err, result) {
             // Voert de bovenstaande query uit om users in de table te zetten.
             if (err) {
@@ -149,5 +149,51 @@ router.post("/update", (req, res) => {
         });
     }
 });
-
+router.post("/blacklistclub", (req, res) => {
+    const { id } = req.body;
+    let session = req.headers.authorization; // Als de post request '/get' wordt uitgevoerd moet de user al geauthorized zijn. Vanaf dit het geval is zit er een token in de headers van elke request dat hij stuurt.
+    if (session !== "") {
+        const sql = "SELECT * FROM users WHERE id='" + session + "'";
+        connection.query(sql, function (err, result) {
+            if (err) {
+                res.json({
+                    status: "FAILED",
+                    message: "Error while fetching users",
+                });
+            } else {
+                const sql = "Update users set blacklistedClubs='CONCAT(blacklistedClubs, \"," + id + "\")' WHERE id='" + session + "'";
+                // Deze querie linkt je huidige user aan de geblackliste clubs zodat je deze kan opslaan.
+                connection.query(sql, function (err, result) {
+                    // Voert de bovenstaande query uit om de user met de 'session' bovenaan te pakken.
+                    if (err) {
+                        // Geeft een 'failed' reactie terug omdat er een error is. (Kan vanalles zijn.)
+                        res.json({
+                            status: "FAILED",
+                            message: "Error while fetching users",
+                        });
+                    } else {
+                        if (result.length > 0) {
+                            // Checked of de hoeveelheid results meer is als 1. Zoniet is er geen persoon met de bovenstaande id.
+                            res.json({
+                                status: "SUCCESS",
+                                message: "Users has been updated",
+                                
+                            });
+                        } else {
+                            res.json({
+                                status: "FAILED",
+                                message: "User is not authenticated",
+                            });
+                        }
+                    }
+                });
+            }
+        })
+    } else {
+        res.json({
+            status: "FAILED",
+            message: "Empty credentials supplied",
+        });
+    }
+});
 module.exports = router; // Returned de router met de aangemaakte post request.

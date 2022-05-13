@@ -14,6 +14,7 @@ export async function getUsers() {
  * Deze functie saved een gebruiker via een aangemaakte post request die naar een functie gaat in de backend.
  * Deze actie wordt uitgevoerd wanneer de user op de 'continue' duwt in de modal die vraagt om zijn gebruikersnaam.
  */
+
 export async function saveUser(name) {
   postData("http://localhost:3000/user/save", { name: name }).then((data) => {
     const date = new Date();

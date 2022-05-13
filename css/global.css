@@ -1,9 +1,12 @@
+body{
+  background-color: #efefef;
+}
 .profile-pic {
   font-size: 33px;
 }
 
 .navbar {
-  box-shadow: 0 2px 2px -2px rgb(122, 122, 122);
+  box-shadow: 0 2px 2px -2px #005391;
 }
 
 .divider {
@@ -18,11 +21,11 @@
 }
 
 .navbar-btn:hover {
-  background-color: #009879;
+  background-color: #005391;
 }
 
 .navbar-btn.active {
-  background-color: #009879;
+  background-color: #005391;
 }
 
 a > .navbar-btn.active {
@@ -37,9 +40,11 @@ a > .navbar-btn {
 a > .navbar-btn:hover {
   color: #fff;
 }
-
+nav {
+  background-image: linear-gradient(#013b68, #005391);
+}
 .con-btn {
-  background-color: #4CAF50;
+  background-color: #005391;
   border: none;
   color: white;
   padding: 10px 32px;
@@ -54,7 +59,7 @@ a > .navbar-btn:hover {
   width: 100%;
   padding: 10px 20px;
   display: inline-block;
-  border: 1px solid #ccc;
+  border: 1px solid #fff;
   border-radius: 10px;
   box-sizing: border-box;
 }
@@ -68,4 +73,43 @@ a > .navbar-btn:hover {
   .profile-pic {
       margin-right: 5px;
   }
+}
+
+
+/*  footer  */
+.footer {
+  padding: 10px 20px 20px;
+  margin-top: 200px;
+  background-image: linear-gradient(#005391, #262842);
+  color: #fff;
+}
+.footer-logo {
+  width: 150px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.footer h4 {
+  text-align: left;
+  margin-top: 15px;
+  margin-bottom: 25px;
+}
+.footer p {
+  font-size: 12px;
+  text-align: justify;
+  padding-right: 35px;
+}
+.footer .row .fa {
+  padding-right: 20px;
+  font-size: 15px;
+}
+.footer hr {
+  margin-top: 8px;
+  background: #efefef;
+}
+.fa-heart {
+  margin: 0 5px;
+  color: #f44336;
+}
+.footer .copyright {
+  text-align: center;
 }
