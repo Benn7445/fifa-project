@@ -1,5 +1,5 @@
 require("./backend/configs/db"); // De Mysql connection die wordt aangemaakt bij het runnen van het project.
-
+require("ejs");
 const app = require("express")();
 
 /**
@@ -17,6 +17,9 @@ app.set("port", 3001);
 
 app.get("/", (req, res) => {
   res.render("index");
+});
+app.get("/Views/quiz.ejs", (req, res) => {
+  res.render("quiz");
 });
 
 /**
