@@ -10,18 +10,30 @@ const cors = require("cors");
 app.use(cors());
 const express = require("express");
 const ejs = require("ejs"); // EJS import
+app.use("/public", express.static("public"));
 
 app.use(express.static("public"));
 app.set("view engine", "ejs"); // EJS als view engine
 app.set("port", 3001);
 
-app.get("/", (req, res) => {
+app.get("/Views", (req, res) => {
   res.render("index");
 });
 app.get("/Views/quiz.ejs", (req, res) => {
   res.render("quiz");
 });
-
+app.get("/Views/leaderboard.ejs", (req, res) => {
+  res.render("leaderboard");
+});
+app.get("/Views/favorite_leagues.ejs", (req, res) => {
+  res.render("favorite_leagues");
+});
+app.get("/Views/favorite_clubs.ejs", (req, res) => {
+  res.render("favorite_clubs");
+});
+app.get("/Views/blacklisted_clubs.ejs", (req, res) => {
+  res.render("blacklisted_clubs");
+});
 /**
  * Dit zorgt ervoor dat json kan worden uitgelezen in de body van de requests.
  */
