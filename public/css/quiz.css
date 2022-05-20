@@ -4,7 +4,9 @@
     background-attachment: fixed; 
     background-size: cover;
 } */
-
+.footer{
+  position: relative !important;
+}
 .choice-container {
   display: flex;
   margin-bottom: 0.5rem;
@@ -13,10 +15,12 @@
   border: 0.1rem solid #005391;
   border-radius: 6px;
   background-color: white;
+  
 }
 .choice-container p {
   margin-bottom: 0;
   border-radius: 4px 0 0 4px;
+  
 }
 .choice-container:hover {
   cursor: pointer;

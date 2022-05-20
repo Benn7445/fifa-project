@@ -1,5 +1,6 @@
-import { updateUser } from "../api/userActions.js";
+import { blacklistClub, blacklistLeague, likeClub, likeLeague, updateUser } from "../api/userActions.js";
 
+let currentClubQuestion = true;
 let score = 0;
 let leaguesAmount = 1;
 let clubsAmount = 1;
@@ -21,6 +22,7 @@ function getToken() {
 }
 
 async function fetchFromDB(club, id) {
+  currentClubQuestion = club;
   return fetch(`https://futdb.app/api/${club ? "clubs" : "leagues"}/${id}`, {
     headers: {
       "X-AUTH-TOKEN": getToken(),
@@ -127,6 +129,13 @@ function getRandomNumber(notAllowed, clubQuestion) {
 
 function startGame() {
   createQuestion();
+  document.getElementById("dislike-btn").onclick = () => {
+    if(currentClubQuestion) blacklistClub(clubsAmount);
+  }
+  document.getElementById("like-btn").onclick = () => {
+    if(currentClubQuestion) likeClub(clubsAmount);
+    else likeLeague(leaguesAmount);
+  }
 }
 
 startGame();

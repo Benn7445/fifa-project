@@ -1,5 +1,7 @@
-body{
+body {
   background-color: #efefef;
+  height: 100%;
+  margin: 0;
 }
 .profile-pic {
   font-size: 33px;
@@ -71,10 +73,9 @@ nav {
   }
 
   .profile-pic {
-      margin-right: 5px;
+    margin-right: 5px;
   }
 }
-
 
 /*  footer  */
 .footer {
@@ -82,6 +83,10 @@ nav {
   margin-top: 200px;
   background-image: linear-gradient(#005391, #262842);
   color: #fff;
+  width: 100%;
+  bottom: 0 !important;
+
+  position: fixed;
 }
 .footer-logo {
   width: 150px;
