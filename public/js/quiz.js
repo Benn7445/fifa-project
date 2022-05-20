@@ -1,4 +1,10 @@
-import { blacklistClub, blacklistLeague, likeClub, likeLeague, updateUser } from "../api/userActions.js";
+import {
+  blacklistClub,
+  blacklistLeague,
+  likeClub,
+  likeLeague,
+  updateUser,
+} from "../api/userActions.js";
 
 let currentClubQuestion = true;
 let score = 0;
@@ -130,12 +136,12 @@ function getRandomNumber(notAllowed, clubQuestion) {
 function startGame() {
   createQuestion();
   document.getElementById("dislike-btn").onclick = () => {
-    if(currentClubQuestion) blacklistClub(clubsAmount);
-  }
+    if (currentClubQuestion) blacklistClub(clubsAmount);
+  };
   document.getElementById("like-btn").onclick = () => {
-    if(currentClubQuestion) likeClub(clubsAmount);
+    if (currentClubQuestion) likeClub(clubsAmount);
     else likeLeague(leaguesAmount);
-  }
+  };
 }
 
 startGame();
