@@ -11,8 +11,8 @@ const tokens = [
   "5af56245-7245-42cb-b404-ad2b8384f437",
   "e1745e1b-50f5-4a14-96a3-e99f58f4cf7c",
   "fd522bbb-37b0-4b71-838e-fd022c542b00",
-  "66377b9f-27ec-4f93-8162-9a4d51bbcbf0"
-]
+  "66377b9f-27ec-4f93-8162-9a4d51bbcbf0",
+];
 
 function getToken() {
   const token = tokens[tokenAmount];
@@ -33,34 +33,41 @@ async function fetchFromDB(club, id) {
     })
     .then(async (data) => {
       return data.item.name;
-    }).catch((err) => {
-      if (club) clubsAmount = (id > 674 ? 0 : clubsAmount + 1);
-      else leaguesAmount = (id > 49 ? 0 : leaguesAmount + 1);
+    })
+    .catch((err) => {
+      if (club) clubsAmount = id > 674 ? 0 : clubsAmount + 1;
+      else leaguesAmount = id > 49 ? 0 : leaguesAmount + 1;
       return fetchFromDB(club, club ? clubsAmount : leaguesAmount);
     });
 }
 
 async function setFromDB(club, id) {
-  return fetch(`https://futdb.app/api/${club ? "clubs" : "leagues"}/${id}/image`, {
-    headers: {
-      "X-AUTH-TOKEN": getToken(),
-    },
-  }).then((response) => {
-    if (response.ok) {
-      response.blob().then((blobResponse) => {
-        const urlCreator = window.URL || window.webkitURL;
-        document.getElementById("clubimg").src = urlCreator.createObjectURL(blobResponse);
-      });
-    } else {
-      if (clubsAmount <= leaguesAmount) clubsAmount += 1;
-      else clubsAmount += 1;
-      return setFromDB(club, clubsAmount);
+  return fetch(
+    `https://futdb.app/api/${club ? "clubs" : "leagues"}/${id}/image`,
+    {
+      headers: {
+        "X-AUTH-TOKEN": getToken(),
+      },
     }
-  }).catch((err) => {
-    if (clubsAmount <= leaguesAmount) clubsAmount += 1;
-    else leaguesAmount = leaguesAmount + 1;
-    return setFromDB(club, leaguesAmount);
-  });
+  )
+    .then((response) => {
+      if (response.ok) {
+        response.blob().then((blobResponse) => {
+          const urlCreator = window.URL || window.webkitURL;
+          document.getElementById("clubimg").src =
+            urlCreator.createObjectURL(blobResponse);
+        });
+      } else {
+        if (clubsAmount <= leaguesAmount) clubsAmount += 1;
+        else clubsAmount += 1;
+        return setFromDB(club, clubsAmount);
+      }
+    })
+    .catch((err) => {
+      if (clubsAmount <= leaguesAmount) clubsAmount += 1;
+      else leaguesAmount = leaguesAmount + 1;
+      return setFromDB(club, leaguesAmount);
+    });
 }
 
 function createQuestion() {
@@ -70,35 +77,46 @@ function createQuestion() {
   });
   const clubQuestion = clubsAmount <= leaguesAmount;
   const answerId = Math.floor(Math.random() * 4) + 1;
-  fetchFromDB(clubQuestion, clubQuestion ? clubsAmount : leaguesAmount).then((name) => {
-    setFromDB(clubQuestion, clubQuestion ? clubsAmount : leaguesAmount).then(() => {
-      const currentNumbers = [];
-      choices.forEach((choice, count) => {
-        if ((count + 1) === answerId) {
-          choice.textContent = name;
-          choice.addEventListener("click", () => {
-            score += 10;
-            document.getElementById("score").textContent = score;
-            choices.forEach((eChoice) => {
-              eChoice.replaceWith(eChoice.cloneNode(true));
-            });
-            createQuestion();
-          }, true);
-        }
-        else {
-          choice.addEventListener("click", () => {
-            updateUser(score);
-            window.location = "/html/leaderboard.html"
-          }, true);
-          const numb = getRandomNumber(currentNumbers, clubQuestion);
-          currentNumbers.push(numb);
-          fetchFromDB(clubQuestion, numb).then((choiceName) => {
-            choice.textContent = choiceName;
+  fetchFromDB(clubQuestion, clubQuestion ? clubsAmount : leaguesAmount).then(
+    (name) => {
+      setFromDB(clubQuestion, clubQuestion ? clubsAmount : leaguesAmount).then(
+        () => {
+          const currentNumbers = [];
+          choices.forEach((choice, count) => {
+            if (count + 1 === answerId) {
+              choice.textContent = name;
+              choice.addEventListener(
+                "click",
+                () => {
+                  score += 10;
+                  document.getElementById("score").textContent = score;
+                  choices.forEach((eChoice) => {
+                    eChoice.replaceWith(eChoice.cloneNode(true));
+                  });
+                  createQuestion();
+                },
+                true
+              );
+            } else {
+              choice.addEventListener(
+                "click",
+                () => {
+                  updateUser(score);
+                  window.location = "/Views/leaderboard.ejs";
+                },
+                true
+              );
+              const numb = getRandomNumber(currentNumbers, clubQuestion);
+              currentNumbers.push(numb);
+              fetchFromDB(clubQuestion, numb).then((choiceName) => {
+                choice.textContent = choiceName;
+              });
+            }
           });
         }
-      })
-    })
-  });
+      );
+    }
+  );
 }
 
 function getRandomNumber(notAllowed, clubQuestion) {
