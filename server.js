@@ -24,6 +24,8 @@ app.use("/user", UserRouter);
 /**
  * Laat de app runnen op de port 3000.
  */
-app.listen(3000, () => {
+//heroku poort instellingen
+app.set('port', (process.env.PORT || 5000));
+app.listen(app.get('port'), () => {
   console.log("Fifa-Project-Backend server running..");
 });
