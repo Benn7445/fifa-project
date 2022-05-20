@@ -30,6 +30,18 @@ export function updateUser(score) {
   postData("http://localhost:3000/user/update", { score: score });
 }
 
+export function blacklistClub(club) {
+  postData("http://localhost:3000/user/blacklistclub", { club: club });
+}
+
+export function likeClub(club) {
+  postData("http://localhost:3000/user/likeclub", { club: club });
+}
+
+export function likeLeague(league) {
+  postData("http://localhost:3000/user/likeleague", { league: league });
+}
+
 /**
  * Deze functie checked of de user is ingelogd via een aangemaakte post request die naar een functie gaat in de backend.
  * Deze functie moet uitgevoerd worden aan het laden van elke pagina, behalve de landingspage.

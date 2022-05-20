@@ -16,22 +16,22 @@ app.use(express.static("public"));
 app.set("view engine", "ejs"); // EJS als view engine
 app.set("port", 3001);
 
-app.get("/Views", (req, res) => {
+app.get("/", (req, res) => {
   res.render("index");
 });
-app.get("/Views/quiz.ejs", (req, res) => {
+app.get("/quiz", (req, res) => {
   res.render("quiz");
 });
-app.get("/Views/leaderboard.ejs", (req, res) => {
+app.get("/leaderboard", (req, res) => {
   res.render("leaderboard");
 });
-app.get("/Views/favorite_leagues.ejs", (req, res) => {
+app.get("/favorite_leagues", (req, res) => {
   res.render("favorite_leagues");
 });
-app.get("/Views/favorite_clubs.ejs", (req, res) => {
+app.get("/favorite_clubs", (req, res) => {
   res.render("favorite_clubs");
 });
-app.get("/Views/blacklisted_clubs.ejs", (req, res) => {
+app.get("/blacklisted_clubs", (req, res) => {
   res.render("blacklisted_clubs");
 });
 /**
