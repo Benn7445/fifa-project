@@ -100,7 +100,7 @@ function createQuestion() {
                 "click",
                 () => {
                   updateUser(score);
-                  window.location = "/Views/leaderboard.ejs";
+                  window.location = "/leaderboard";
                 },
                 true
               );
