@@ -1,9 +1,6 @@
-import { updateUser } from "../api/userActions.js";
-module.export = {
-  foo() {},
-  bar() {},
-};
+import { updateUser } from "../api/userActions";
 
+console.log("F in the chat");
 const question = document.getElementById("question");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
 const progressText = document.getElementById("progressText");
