@@ -13,7 +13,7 @@ const ejs = require("ejs"); // EJS import
 
 app.use(express.static("public"));
 app.set("view engine", "ejs"); // EJS als view engine
-app.set("port", 3001);
+app.set("port", 5000);
 
 app.get("/", (req, res) => {
   res.render("index");
@@ -35,7 +35,7 @@ const UserRouter = require("./backend/api/user");
 app.use("/user", UserRouter);
 
 /**
- * Laat de app runnen op de port 3000.
+ * Laat de app runnen op de port 5000.
  */
 app.listen(app.get("port"), () =>
   console.log("[server] http://localhost:" + app.get("port"))
