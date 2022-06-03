@@ -85,7 +85,8 @@ nav {
   color: #fff;
   width: 100%;
   bottom: 0 !important;
-  position: fixed
+  position: fixed !important;
+  max-height: 45%;
 }
 
 .footer-logo {
