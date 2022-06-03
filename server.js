@@ -52,7 +52,9 @@ Laat de app runnen op de port 3000.
 app.listen(app.get("port"), () =>
   console.log("[server] http://localhost/:" + app.get("port"))
 );
-const port = 
-app.listen(3000, () => {
+const port = process.env.PORT;
+
+app.listen(port || 5000, () => {
   console.log("Fifa-Project-Backend server running..");
 });
+
