@@ -41,6 +41,7 @@ app.listen(app.get("port"), () =>
   console.log("[server] http://localhost:" + app.get("port"))
 );
 app.set('port', (process.env.PORT || 5000));
-app.listen(5000, () => {
-  console.log("Fifa-Project-Backend server running..");
+const poort =  process.env.PORT;
+app.listen(poort, () => {
+  console.log("Fifa-Project-Backend server running op poost ${poort}.");
 });
