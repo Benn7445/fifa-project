@@ -57,7 +57,7 @@ app.listen(app.get("port"), () =>
 );
 const port = process.env.PORT;
 app.set('port', (process.env.PORT || 5000));
-app.listen(port || 5000, () => {
+app.listen(app.get('port'), () => {
   console.log("Fifa-Project-Backend server running..");
 });
 
