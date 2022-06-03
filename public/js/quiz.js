@@ -1,9 +1,11 @@
-import { updateUser } from "../api/userActions.js";
+import { blacklistClub, likeClub, likeLeague, updateUser } from "../api/userActions.js";
 
 let score = 0;
 let leaguesAmount = 1;
 let clubsAmount = 1;
 let tokenAmount = 0;
+let currentName = "";
+let clubQuestion = true;
 
 const tokens = [
   "ab5195e0-4d2f-43e2-ba6a-80cd57c641b3",
@@ -30,6 +32,10 @@ async function fetchFromDB(club, id) {
       return response.json();
     })
     .then(async (data) => {
+      clubQuestion = club;
+      if(!club) document.getElementById("dislike-btn").style.cssText = "display: none"
+      else document.getElementById("dislike-btn").style.cssText = ""
+      currentName = data.item.name;
       return data.item.name;
     })
     .catch((err) => {
@@ -126,7 +132,29 @@ function getRandomNumber(notAllowed, clubQuestion) {
 }
 
 function startGame() {
+  reloadPage();
   createQuestion();
+  document.getElementById("dislike-btn").onclick = () => {
+    if (clubQuestion) blacklistClub(currentName);
+  }
+  document.getElementById("like-btn").onclick = () => {
+    if (clubQuestion) {
+      console.log("Hye");
+      likeClub(currentName);
+    }
+    else likeLeague(currentName);
+  }
+}
+
+function reloadPage() {
+  window.addEventListener("pageshow", function (event) {
+    var historyTraversal = event.persisted ||
+      (typeof window.performance != "undefined" &&
+        window.performance.navigation.type === 2);
+    if (historyTraversal) {
+      window.location.reload();
+    }
+  });
 }
 
 startGame();
