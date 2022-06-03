@@ -155,12 +155,24 @@ router.post("/blacklistclub", (req, res) => {
   changeStatusLC(req, res, "blacklistedClubs")
 });
 
+router.post("/unblacklistclub", (req, res) => {
+  changeStatusRLC(req, res, "blacklistedClubs")
+});
+
 router.post("/likeclub", (req, res) => {
   changeStatusLC(req, res, "favoriteClubs")
 });
 
+router.post("/unlikeclub", (req, res) => {
+  changeStatusRLC(req, res, "favoriteClubs")
+});
+
 router.post("/likeleague", (req, res) => {
   changeStatusLC(req, res, "favoriteLeagues")
+});
+
+router.post("/unlikeleague", (req, res) => {
+  changeStatusRLC(req, res, "favoriteLeagues")
 });
 
 function changeStatusLC(req, res, state) {
@@ -186,19 +198,52 @@ function changeStatusLC(req, res, state) {
               message: "Error while fetching users",
             });
           } else {
-            if (result.length > 0) {
-              // Checked of de hoeveelheid results meer is als 1. Zoniet is er geen persoon met de bovenstaande id.
-              res.json({
-                status: "SUCCESS",
-                message: "Users has been updated",
+            // Checked of de hoeveelheid results meer is als 1. Zoniet is er geen persoon met de bovenstaande id.
+            res.json({
+              status: "SUCCESS",
+              message: "Users has been updated",
+            });
+          }
+        });
+      }
+    })
+  } else {
+    res.json({
+      status: "FAILED",
+      message: "Empty credentials supplied",
+    });
+  }
+}
 
-              });
-            } else {
-              res.json({
-                status: "FAILED",
-                message: "User is not authenticated",
-              });
-            }
+function changeStatusRLC(req, res, state) {
+  const { club } = req.body;
+  let session = req.headers.authorization; // Als de post request '/get' wordt uitgevoerd moet de user al geauthorized zijn. Vanaf dit het geval is zit er een token in de headers van elke request dat hij stuurt.
+  if (session !== "") {
+    const sql = "SELECT * FROM users WHERE id='" + session + "'";
+    connection.query(sql, function (err, result) {
+      if (err) {
+        res.json({
+          status: "FAILED",
+          message: "Error while fetching users",
+        });
+      } else {
+        const sql = "Update users set " + state + "=REPLACE(" + state + ", \"" + club + ",\", \"\") WHERE id='" + session + "'";
+        // Deze querie linkt je huidige user aan de geblackliste clubs zodat je deze kan opslaan.
+        connection.query(sql, function (err, result) {
+          // Voert de bovenstaande query uit om de user met de 'session' bovenaan te pakken.
+          if (err) {
+            // Geeft een 'failed' reactie terug omdat er een error is. (Kan vanalles zijn.)
+            console.log(err)
+            res.json({
+              status: "FAILED",
+              message: "Error while fetching users",
+            });
+          } else {
+            res.json({
+              status: "SUCCESS",
+              message: "Users has been updated",
+            });
+
           }
         });
       }

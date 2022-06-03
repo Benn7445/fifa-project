@@ -1,11 +1,11 @@
 import { blacklistClub, likeClub, likeLeague, updateUser } from "../api/userActions.js";
 
-let currentClubQuestion = true;
 let score = 0;
 let leaguesAmount = 1;
 let clubsAmount = 1;
 let tokenAmount = 0;
 let currentName = "";
+let clubQuestion = true;
 
 const tokens = [
   "ab5195e0-4d2f-43e2-ba6a-80cd57c641b3",
@@ -23,7 +23,6 @@ function getToken() {
 }
 
 async function fetchFromDB(club, id) {
-  currentClubQuestion = club;
   return fetch(`https://futdb.app/api/${club ? "clubs" : "leagues"}/${id}`, {
     headers: {
       "X-AUTH-TOKEN": getToken(),
@@ -33,6 +32,9 @@ async function fetchFromDB(club, id) {
       return response.json();
     })
     .then(async (data) => {
+      clubQuestion = club;
+      if(!club) document.getElementById("dislike-btn").style.cssText = "display: none"
+      else document.getElementById("dislike-btn").style.cssText = ""
       currentName = data.item.name;
       return data.item.name;
     })
@@ -104,7 +106,7 @@ function createQuestion() {
                 "click",
                 () => {
                   updateUser(score);
-                  window.location = "/Views/leaderboard.ejs";
+                  window.location = "/leaderboard";
                 },
                 true
               );
@@ -133,10 +135,13 @@ function startGame() {
   reloadPage();
   createQuestion();
   document.getElementById("dislike-btn").onclick = () => {
-    if (currentClubQuestion) blacklistClub(currentName);
+    if (clubQuestion) blacklistClub(currentName);
   }
   document.getElementById("like-btn").onclick = () => {
-    if (currentClubQuestion) likeClub(currentName);
+    if (clubQuestion) {
+      console.log("Hye");
+      likeClub(currentName);
+    }
     else likeLeague(currentName);
   }
 }
