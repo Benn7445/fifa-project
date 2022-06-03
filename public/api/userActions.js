@@ -38,8 +38,20 @@ export function likeClub(club) {
   postData("http://localhost:3000/user/likeclub", { club: club });
 }
 
-export function likeLeague(league) {
-  postData("http://localhost:3000/user/likeleague", { league: league });
+export function likeLeague(club) {
+  postData("http://localhost:3000/user/likeleague", { club: club });
+}
+
+export function unblacklistClub(club) {
+  postData("http://localhost:3000/user/unblacklistclub", { club: club });
+}
+
+export function unlikeClub(club) {
+  postData("http://localhost:3000/user/unlikeclub", { club: club }).then((d) => console.log(d));
+}
+
+export function unlikeLeague(club) {
+  postData("http://localhost:3000/user/unlikeleague", { club: club });
 }
 
 /**
