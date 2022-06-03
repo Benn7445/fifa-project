@@ -13,7 +13,7 @@ const ejs = require("ejs"); // EJS import
 
 app.use(express.static("public"));
 app.set("view engine", "ejs"); // EJS als view engine
-app.set("port", 5000);
+app.set("port", 5001);
 
 app.get("/", (req, res) => {
   res.render("index");
