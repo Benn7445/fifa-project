@@ -15,7 +15,7 @@ app.use(express.static("views" + '../public'));
 
 app.use(express.static("public"));
 app.set("view engine", "ejs"); // EJS als view engine
-app.set("port", 3001);
+
 
 app.engine('html', require('ejs').renderFile);
 
@@ -53,7 +53,7 @@ app.use("/user", UserRouter);
 Laat de app runnen op de port 3000.
  */
 app.listen(app.get("port"), () =>
-  console.log("[server] http://localhost/:" + app.get("port"))
+  console.log("[server] http://localhost:" + app.get("port"))
 );
 const port = process.env.PORT;
 app.set('port', (process.env.PORT || 5000));
