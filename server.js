@@ -14,7 +14,6 @@ app.use("/public", express.static("public"));
 
 app.use(express.static("public"));
 app.set("view engine", "ejs"); // EJS als view engine
-app.set("port", 3001);
 
 app.get("/", (req, res) => {
   res.render("index");
