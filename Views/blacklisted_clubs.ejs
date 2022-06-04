@@ -30,52 +30,15 @@
       crossorigin="anonymous"
     ></script>
     <script defer type="module" src="../js/login.js"></script>
+    <script defer type="module" src="../js/listClubs.js"></script>
 
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fifa Quiz</title>
     <scrip src="../js/index.js" />
-    <link rel="stylesheet" href="../css/clubandleagues.css" />
     <link rel="stylesheet" href="../css/global.css" />
-    <link rel="stylesheet" href="../css/index.css" />
     <script src="https://code.iconify.design/2/2.1.2/iconify.min.js"></script>
-  </head>
-  <head>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
-
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"
-    ></script>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../css/global.css" />
-    <link rel="stylesheet" href="../css/leaderboard.css" />
-    <script src="https://code.iconify.design/2/2.1.2/iconify.min.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <title>Fifa leaderboard</title>
-  </head>
   <!--Met behulp van https://codepen.io/dcode-software/pen/dLVwOY-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
     integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
@@ -127,59 +90,44 @@
               Hi, user!
             </a>
             <section class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="../html/favorite_leagues.html"
+              <a class="dropdown-item" href="../favorite_leagues"
                 >Favorite League</a
               >
-              <a class="dropdown-item" href="../html/favorite_clubs.html"
+              <a class="dropdown-item" href="../favorite_clubs"
                 >Favorite Club</a
               >
             </section>
           </li>
         </ul>
         <section>
-          <a href="../html/"><button class="navbar-btn">Home</button></a>
-          <a href="../html/quiz.html"
+          <a href="../"><button class="navbar-btn">Home</button></a>
+          <a href="../quiz"
             ><button class="navbar-btn">Quiz</button></a
           >
-          <a href="../html/leaderboard.html"
+          <a href="../leaderboard"
             ><button class="navbar-btn">Leaderboards</button></a
           >
         </section>
       </section>
     </nav>
-    <p class="CurrentPage">blacklisted_clubs :</p>
     </section>
   </nav>
     <table class="content-table mt-5">
       <thead>
         <tr>
           <th>Club</th>
-          <th>Reden</th>
           <th>Delete</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td>real madrid</td>
-          <td>ze zijn bekend</td>
-          <td>
-            <button class="btn"><i class="fa fa-close"></i></button>
-          </td>
-        </tr>
-        <tr>
-          <td>fc de kampioenen</td>
-          <td>de beste</td>
-          <td>
-            <button class="btn"><i class="fa fa-close"></i></button>
-          </td>
-        </tr>
+      <tbody id="table-list">
+        
       </tbody>
     </table>
     <section class="footer">
       <div class="container">
         <div class="row">
           <div class="col-md-3">
-            <img src="/logos/fifa-23-pc-spel-cover.jpg" class="footer-logo" />
+            <img src="/images/fifa-23-pc-spel-cover.jpg" class="footer-logo" />
           </div>
           <div class="col-md-3">
             <h4>Explore</h4>
