@@ -51,7 +51,7 @@ app.use("/user", UserRouter);
 app.listen(app.get("port"), () =>
   console.log("[server] http://localhost:" + app.get("port"))
 );
-app.set("port", process.env.PORT || 3000);
+app.set("port", process.env.PORT || 3001);
 app.listen(app.get("port"), function () {});
 app.listen(3000, () => {
   console.log("Fifa-Project-Backend server running..");
