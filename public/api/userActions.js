@@ -2,7 +2,7 @@
  * Deze functie geeft alle gebruikers terug via een aangemaakte post request die naar een functie gaat in de backend.
  */
 export async function getUsers() {
-  return await fetch("http://localhost:3000/user/getall", { method: "POST" })
+  return await fetch("/user/getall", { method: "POST" })
     .then((result) => result.json())
     .then((data) => {
       if (data.status === "SUCCESS") return data.users;
@@ -16,7 +16,7 @@ export async function getUsers() {
  */
 
 export async function saveUser(name) {
-  postData("http://localhost:3000/user/save", { name: name }).then((data) => {
+  postData("/user/save", { name: name }).then((data) => {
     const date = new Date();
     date.setTime(date.getTime() + 30 * 24 * 60 * 60 * 1000);
     let expires = "expires=" + date.toUTCString();
@@ -27,7 +27,31 @@ export async function saveUser(name) {
 }
 
 export function updateUser(score) {
-  postData("http://localhost:3000/user/update", { score: score });
+  postData("/user/update", { score: score });
+}
+
+export function blacklistClub(club) {
+  postData("/user/blacklistclub", { club: club });
+}
+
+export function likeClub(club) {
+  postData("/user/likeclub", { club: club });
+}
+
+export function likeLeague(club) {
+  postData("/user/likeleague", { club: club });
+}
+
+export function unblacklistClub(club) {
+  postData("/user/unblacklistclub", { club: club });
+}
+
+export function unlikeClub(club) {
+  postData("/user/unlikeclub", { club: club }).then((d) => console.log(d));
+}
+
+export function unlikeLeague(club) {
+  postData("/user/unlikeleague", { club: club });
 }
 
 /**
@@ -35,7 +59,7 @@ export function updateUser(score) {
  * Deze functie moet uitgevoerd worden aan het laden van elke pagina, behalve de landingspage.
  */
 export async function checkLogin() {
-  return await postData("http://localhost:3000/user/get", {}).then((result) => {
+  return await postData("/user/get", {}).then((result) => {
     if (result.status === "SUCCESS") return result.user;
     else return undefined;
   });

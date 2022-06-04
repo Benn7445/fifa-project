@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+ 
 
 <head>
   <title>Fifa Quiz</title>
@@ -17,16 +18,14 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
-    <script defer type="module" src="../js/login.js"></script>
-    <script defer type="module" src="../js/quiz.js"></script>
 
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fifa Quiz</title>
-  <script type="module" src="../js/index.js" />
-  <link rel="stylesheet" href="../css/quiz.css" />
-  <link rel="stylesheet" href="../css/global.css" />
+  <script type="module" src="../js/quiz.js" ></script>
+  <script defer type="module" src="../js/login.js"></script>
+  <link rel="stylesheet" href="/css/quiz.css" />
+  <link rel="stylesheet" href="/css/global.css" />
   <script src="https://code.iconify.design/2/2.1.2/iconify.min.js"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -49,18 +48,18 @@
             Hi, user!
           </a>
           <section class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="../Views/blacklisted_clubs.ejs">Blacklisted Club</a>
+            <a class="dropdown-item" href="../blacklisted_clubs">Blacklisted Club</a>
             <hr class="divider" />
-            <a class="dropdown-item" href="../Views/favorite_leagues.ejs">Favorite League</a>
-            <a class="dropdown-item" href="../Views/favorite_clubs.ejs">Favorite clubs</a>
+            <a class="dropdown-item" href="../favorite_leagues">Favorite League</a>
+            <a class="dropdown-item" href="../favorite_clubs">Favorite clubs</a>
 
           </section>
         </li>
       </ul>
       <section>
-        <a href="../Views/"><button class="navbar-btn">Home</button></a>
-        <a href="../Views/quiz.ejs"><button class="navbar-btn active">Quiz</button></a>
-        <a href="../Views/leaderboard.ejs"><button class="navbar-btn">Leaderboards</button></a>
+        <a href="../"><button class="navbar-btn">Home</button></a>
+        <a href="../quiz"><button class="navbar-btn active">Quiz</button></a>
+        <a href="../leaderboard"><button class="navbar-btn">Leaderboards</button></a>
       </section>
     </section>
   </nav>
@@ -76,10 +75,9 @@
             <p class="hud-prefix">Score</p>
             <h1 class="hud-main-text" id="score">0</h1>
           </div>
-          
-        </div>
-        <a class="click">  <button class="btn"><i class="fa fa-thumbs-up"></i></button></a>
-        <a class="clicks"><button class="btn"><i class="fa fa-thumbs-down"></i></button></a>
+        </div class="dis-like-btn">
+        <a id="like-btn" class="click">  <button class="btn"><i class="fa fa-thumbs-up"></i></button></a>
+        <a id="dislike-btn" class="clicks"><button class="btn"><i class="fa fa-thumbs-down"></i></button></a>
         </div>
         <h2 id="question"></h2>
         <div class="choice-container">
@@ -117,7 +115,7 @@
         Swal.fire({
           icon: 'success',
           title: 'Success',
-          text: 'De club/league is op de blacklist lijst gezet',
+          text: 'De club/league is op de blacklist gezet',
         })
       })
     </script>
@@ -125,7 +123,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3">
-                <img src="/logos/fifa-23-pc-spel-cover.jpg" class="footer-logo">
+                <img src="/images/fifa-23-pc-spel-cover.jpg" class="footer-logo">
                  </div>
             <div class="col-md-3">
                 <h4>Explore</h4>

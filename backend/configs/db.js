@@ -10,10 +10,10 @@ var mysql = require("mysql");
  *       Gaat worden gefixt bij volgende labo.
  */
 var connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "fifaProject",
+  host: "remotemysql.com",
+  user: "Pjnq4M6HaR",
+  password: "vpMbE4SltG",
+  database: "Pjnq4M6HaR",
 });
 
 /**

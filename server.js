@@ -11,7 +11,6 @@ app.use(cors());
 const express = require("express");
 const ejs = require("ejs"); // EJS import
 app.use("/public", express.static("public"));
-app.use(express.static("views" + '../public'));
 
 app.use(express.static("public"));
 app.set("view engine", "ejs"); // EJS als view engine
@@ -37,7 +36,7 @@ app.get("/favorite_clubs", (req, res) => {
 app.get("/blacklisted_clubs", (req, res) => {
   res.render("blacklisted_clubs");
 });
-/*
+/**
  * Dit zorgt ervoor dat json kan worden uitgelezen in de body van de requests.
  */
 const bodyParser = require("express").json;
@@ -50,10 +49,10 @@ const UserRouter = require("./backend/api/user");
 app.use("/user", UserRouter);
 
 /* 
-Laat de app runnen op de port 3000.
+Laat de app runnen op de port 5000.
  */
 app.listen(app.get("port"), () =>
-  console.log("[server] http://localhost/:" + app.get("port"))
+  console.log("[server] http://localhost:" + app.get("port"))
 );
 const port = process.env.PORT;
 app.set('port', (process.env.PORT || 5000));
