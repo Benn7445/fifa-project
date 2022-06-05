@@ -1,4 +1,9 @@
-import { blacklistClub, likeClub, likeLeague, updateUser } from "../api/userActions.js";
+import {
+  blacklistClub,
+  likeClub,
+  likeLeague,
+  updateUser,
+} from "../api/userActions.js";
 
 let score = 0;
 let leaguesAmount = 1;
@@ -33,9 +38,9 @@ async function fetchFromDB(club, id) {
     })
     .then(async (data) => {
       clubQuestion = club;
-      if(!club) document.getElementById("dislike-btn").style.cssText = "display: none"
-      else document.getElementById("dislike-btn").style.cssText = ""
-      currentName = data.item.name;
+      if (!club)
+        document.getElementById("dislike-btn").style.cssText = "display: none";
+      else document.getElementById("dislike-btn").style.cssText = "";
       return data.item.name;
     })
     .catch((err) => {
@@ -83,6 +88,7 @@ function createQuestion() {
   const answerId = Math.floor(Math.random() * 4) + 1;
   fetchFromDB(clubQuestion, clubQuestion ? clubsAmount : leaguesAmount).then(
     (name) => {
+      currentName = name;
       setFromDB(clubQuestion, clubQuestion ? clubsAmount : leaguesAmount).then(
         () => {
           const currentNumbers = [];
@@ -136,19 +142,19 @@ function startGame() {
   createQuestion();
   document.getElementById("dislike-btn").onclick = () => {
     if (clubQuestion) blacklistClub(currentName);
-  }
+  };
   document.getElementById("like-btn").onclick = () => {
     if (clubQuestion) {
       console.log("Hye");
       likeClub(currentName);
-    }
-    else likeLeague(currentName);
-  }
+    } else likeLeague(currentName);
+  };
 }
 
 function reloadPage() {
   window.addEventListener("pageshow", function (event) {
-    var historyTraversal = event.persisted ||
+    var historyTraversal =
+      event.persisted ||
       (typeof window.performance != "undefined" &&
         window.performance.navigation.type === 2);
     if (historyTraversal) {
