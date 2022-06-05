@@ -39,9 +39,6 @@ app.use(bodyParser());
 const UserRouter = require("./backend/api/user");
 app.use("/user", UserRouter);
 
-/**
- * Laat de app runnen op de port 3000.
- */
-app.listen(3000, () =>
-  console.log("[server] http://localhost:" + 3000)
+app.listen(5000, () =>
+  console.log("[server] http://localhost:" + 5000)
 );
