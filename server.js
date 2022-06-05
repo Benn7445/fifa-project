@@ -2,12 +2,6 @@ require("./backend/configs/db"); // De Mysql connection die wordt aangemaakt bij
 require("ejs");
 const app = require("express")();
 
-/**
- * Cors is de middleware dat wordt gebruikt bij ons project. Hierbij kunnen we zelf bepalen welke origins onze request kunnen gebruiken.
- * Dus niet alleen wanneer ze dezelfde ports hebben.
- */
-const cors = require("cors");
-app.use(cors());
 const express = require("express");
 const ejs = require("ejs"); // EJS import
 app.use("/public", express.static("public"));
@@ -48,11 +42,6 @@ app.use("/user", UserRouter);
 /**
  * Laat de app runnen op de port 3000.
  */
-app.listen(app.get("port"), () =>
-  console.log("[server] http://localhost:" + app.get("port"))
+app.listen(3000, () =>
+  console.log("[server] http://localhost:" + 3000)
 );
-app.set("port", process.env.PORT || 3000);
-app.listen(app.get("port"), function () {});
-app.listen(3000, () => {
-  console.log("Fifa-Project-Backend server running..");
-});
