@@ -9,7 +9,8 @@ var mysql = require("mysql");
  * Note: Er is nog een kleine bug hier waardoor de database de eerste keer niet wordt aangemaakt.
  *       Gaat worden gefixt bij volgende labo.
  */
-var connection = mysql.createConnection({
+const connection = mysql.createPool({
+  connectionLimit : 10,
   host: "remotemysql.com",
   user: "Pjnq4M6HaR",
   password: "vpMbE4SltG",
@@ -19,7 +20,7 @@ var connection = mysql.createConnection({
 /**
  * Hier wordt er connectie gemaakt met deze MySQL.
  */
-connection.connect(function (err) {
+connection.getConnection(function (err) {
   if (err) console.log("Fifa-Project-Backend mysql crashed.."); // Deze line wordt uigevoerd wanneer er een fout is. (Meestal verkeerde MySQL details.)
   console.log("Fifa-Project-Backend mysql running..");
   // Line 23 - 29 is de database die wordt aangemaakt.
