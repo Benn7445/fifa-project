@@ -5,12 +5,11 @@ var mysql = require("mysql");
 /**
  * Hier worden de MySQL details van de XAMPP host ingezet.
  * Xampp: Het programma voor onze locale MySQL.
- *
+ * 
  * Note: Er is nog een kleine bug hier waardoor de database de eerste keer niet wordt aangemaakt.
  *       Gaat worden gefixt bij volgende labo.
  */
-const connection = mysql.createPool({
-  connectionLimit: 10,
+var connection = mysql.createConnection({
   host: "remotemysql.com",
   user: "Pjnq4M6HaR",
   password: "vpMbE4SltG",
@@ -20,7 +19,7 @@ const connection = mysql.createPool({
 /**
  * Hier wordt er connectie gemaakt met deze MySQL.
  */
-connection.getConnection(function (err) {
+connection.connect(function (err) {
   if (err) console.log("Fifa-Project-Backend mysql crashed.."); // Deze line wordt uigevoerd wanneer er een fout is. (Meestal verkeerde MySQL details.)
   console.log("Fifa-Project-Backend mysql running..");
   // Line 23 - 29 is de database die wordt aangemaakt.
